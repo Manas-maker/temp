@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+
+    <table class="table tablestriped">
+        <thead>
+            <tr>
+                <th class="text-start">Symbol</th>
+                <th class="text-start">Name</th>
+                <th class="text-end">Shares</th>
+                <th class="text-end">Price</th>
+                <th class="text-end">TOTAL</th>
+            </tr>
+        </thead>
+       <tbody>
+                {% for company in companies%}
+                <tr>
+                    <td class="text-start">{{company.symbol}}</td>
+                    <td class="text-start">{{company.name}}</td>
+                    <td class="text-end">{{company.shares}}</td>
+                    <td class="text-end">{{company.price | usd}}</td>
+                    <td class="text-end">{{ (company.shares * company.price) | usd}}</td>
+                </tr>
+                {% endfor %}
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">Cash</td>
+                <td>{{cash | usd}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">TOTAL</td>
+                <td>{{total | usd}}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+{% endblock %}
